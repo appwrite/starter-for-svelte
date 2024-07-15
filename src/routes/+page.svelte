@@ -37,16 +37,24 @@
       connected = true;
     } catch (err) {
       if (!(err instanceof AppwriteException)) {
-        throw err;
+        const log = {
+          date: new Date(),
+          method: "GET",
+          path: "/v1/health",
+          status: 500,
+          response: "Something went wrong",
+        };
+        logs = [log, ...logs];
+      } else {
+        const log = {
+          date: new Date(),
+          method: "GET",
+          path: "/v1/health",
+          status: err.code,
+          response: JSON.stringify(err.response),
+        };
+        logs = [log, ...logs];
       }
-      const log = {
-        date: new Date(),
-        method: "GET",
-        path: "/v1/health",
-        status: err.code,
-        response: JSON.stringify(err.response),
-      };
-      logs = [log, ...logs];
     } finally {
       sending = false;
       showLogs = true;
