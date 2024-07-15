@@ -129,10 +129,7 @@
   >
     <h1 class="heading-level-5">Congratulations!</h1>
     <p>You connected your app succesfully.</p>
-    <button
-      on:click|preventDefault={sendPing}
-      class="button u-margin-block-start-32"
-    >
+    <button on:mousedown={sendPing} class="button u-margin-block-start-32">
       <span>Send a ping</span>
       {#if sending}
         <div class="loader is-small"></div>
