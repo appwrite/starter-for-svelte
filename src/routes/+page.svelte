@@ -333,7 +333,8 @@
                     >
                   </td>
                 </tr>
-              {:else}
+              {/each}
+              {#if logs.length === 0}
                 <tr
                   class="table-row u-height-auto"
                   style="min-block-size: unset;"
@@ -342,7 +343,7 @@
                     There are no logs to show
                   </p>
                 </tr>
-              {/each}
+              {/if}
             </tbody>
           </table>
         </div>
