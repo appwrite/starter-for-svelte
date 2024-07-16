@@ -339,7 +339,7 @@
                   style="min-block-size: unset;"
                 >
                   <p class="u-color-text-offline u-padding-16">
-                    Send a ping to see logs...
+                    There are no logs to show
                   </p>
                 </tr>
               {/each}
