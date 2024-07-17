@@ -44,6 +44,25 @@
   );
 }
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.tick-container {
+  width: 2em;
+  height: 2em;
+  border: 1.8px solid hsla(343, 98%, 60%, 0.32);
+  background-color: hsla(343, 98%, 60%, 0.08);
+}
+
 .checker-background {
   position: relative;
   overflow: hidden;

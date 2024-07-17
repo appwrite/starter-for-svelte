@@ -17,13 +17,14 @@
   /** @type {any[]} */
   let logs = [];
 
-  let sending = false;
+  /** @type {'idle' | 'loading' | 'success' | 'error'} */
+  let status = "idle";
+
   let showLogs = false;
-  let connected = false;
 
   async function sendPing() {
-    if (sending) return;
-    sending = true;
+    if (status === "loading") return;
+    status = "loading";
     try {
       const result = await health.get();
       const log = {
@@ -34,29 +35,21 @@
         response: JSON.stringify(result),
       };
       logs = [log, ...logs];
-      connected = true;
+      status = "success";
     } catch (err) {
-      if (!(err instanceof AppwriteException)) {
-        const log = {
-          date: new Date(),
-          method: "GET",
-          path: "/v1/health",
-          status: 500,
-          response: "Something went wrong",
-        };
-        logs = [log, ...logs];
-      } else {
-        const log = {
-          date: new Date(),
-          method: "GET",
-          path: "/v1/health",
-          status: err.code,
-          response: JSON.stringify(err.response),
-        };
-        logs = [log, ...logs];
-      }
+      const log = {
+        date: new Date(),
+        method: "GET",
+        path: "/v1/health",
+        status: err instanceof AppwriteException ? err.code : 500,
+        response:
+          err instanceof AppwriteException
+            ? err.message
+            : "Something went wrong",
+      };
+      logs = [log, ...logs];
+      status = "error";
     } finally {
-      sending = false;
       showLogs = true;
     }
   }
@@ -91,12 +84,12 @@
         </svg>
       </div>
     </div>
-    <div class="u-flex u-cross-center">
+    <div
+      class="u-flex u-cross-center"
+      style={`opacity: ${status === "success" ? 1 : 0}; transition: opacity 2.5s;`}
+    >
       <div class="line-left"></div>
-      <div
-        class="u-flex u-main-center u-border-radius-circle"
-        style="width: 2em; height: 2em; border: 1.8px solid hsla(343, 98%, 60%, 0.32); background-color: hsla(343, 98%, 60%, 0.08);"
-      >
+      <div class="u-flex u-main-center u-border-radius-circle tick-container">
         <span class="icon-check" style="color: #fd366e;"></span>
       </div>
       <div class="line-right"></div>
@@ -127,13 +120,31 @@
     class="u-flex u-flex-vertical u-main-center u-cross-center u-padding-16"
     style="backdrop-filter: blur(1px);"
   >
-    <h1 class="heading-level-5">Congratulations!</h1>
-    <p>You connected your app succesfully.</p>
-    <button on:mousedown={sendPing} class="button u-margin-block-start-32">
-      <span>Send a ping</span>
-      {#if sending}
+    {#if status === "loading"}
+      <div class="u-flex u-cross-center u-gap-16">
         <div class="loader is-small"></div>
+        <h1 class="heading-level-6">Waiting for connection...</h1>
+      </div>
+    {:else if status === "success"}
+      <h1 class="heading-level-5">Congratulations!</h1>
+    {:else}
+      <h1 class="heading-level-5">Check connection</h1>
+    {/if}
+
+    <p class="body-text-2">
+      {#if status === "success"}
+        <span>You connected your app succesfully.</span>
+      {:else if status === "error" || status === "idle"}
+        <span>Send a ping to verify the connection</span>
       {/if}
+    </p>
+
+    <button
+      on:mousedown={sendPing}
+      class="button u-margin-block-start-32"
+      style={`visibility: ${status === "loading" ? "hidden" : "visible"}`}
+    >
+      <span>Send a ping</span>
     </button>
   </section>
 
