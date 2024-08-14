@@ -2,7 +2,7 @@
   import "../app.css";
   import "@appwrite.io/pink";
   import "@appwrite.io/pink-icons";
-  import { health } from "$lib/appwrite";
+  import { client } from "$lib/appwrite";
   import { AppwriteException } from "node-appwrite";
   import {
     PUBLIC_APPWRITE_ENDPOINT,
@@ -26,11 +26,12 @@
     if (status === "loading") return;
     status = "loading";
     try {
-      const result = await health.get();
+      /* @ts-ignore */
+      const result = await client.ping();
       const log = {
         date: new Date(),
         method: "GET",
-        path: "/v1/health",
+        path: "/v1/ping",
         status: 200,
         response: JSON.stringify(result),
       };
@@ -40,7 +41,7 @@
       const log = {
         date: new Date(),
         method: "GET",
-        path: "/v1/health",
+        path: "/v1/ping",
         status: err instanceof AppwriteException ? err.code : 500,
         response:
           err instanceof AppwriteException
