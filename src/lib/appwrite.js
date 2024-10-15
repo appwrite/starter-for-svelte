@@ -11,6 +11,5 @@ const client = new Client()
 
 const account = new Account(client);
 const databases = new Databases(client);
-const health = new Health(client);
 
-export { client, health, account, databases };
+export { client, account, databases };

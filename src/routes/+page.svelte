@@ -61,10 +61,10 @@
 </svelte:head>
 
 <main
-  class="u-flex u-flex-vertical u-padding-32 u-cross-center u-gap-32 checker-background"
+  class="u-flex u-flex-vertical u-padding-20 u-cross-center u-gap-32 checker-background"
   style={`margin-bottom: ${detailHeight}px`}
 >
-  <div class="u-flex u-main-center u-margin-block-start-64">
+  <div class="connection-visual">
     <div class="outer-card">
       <div class="inner-card">
         <svg
@@ -86,7 +86,7 @@
       </div>
     </div>
     <div
-      class="u-flex u-cross-center"
+      class="connection-line u-flex u-cross-center"
       style={`opacity: ${status === "success" ? 1 : 0}; transition: opacity 2.5s;`}
     >
       <div class="line-left"></div>
@@ -118,13 +118,13 @@
   </div>
 
   <section
-    class="u-flex u-flex-vertical u-main-center u-cross-center u-padding-16"
+    class="u-flex u-flex-vertical u-main-center u-cross-center u-padding-16 u-text-center"
     style="backdrop-filter: blur(1px);"
   >
     {#if status === "loading"}
       <div class="u-flex u-cross-center u-gap-16">
         <div class="loader is-small"></div>
-        <h1 class="heading-level-6">Waiting for connection...</h1>
+        <h1 class="heading-level-7">Waiting for connection...</h1>
       </div>
     {:else if status === "success"}
       <h1 class="heading-level-5">Congratulations!</h1>
@@ -149,8 +149,8 @@
     </button>
   </section>
 
-  <nav class="u-grid u-padding-16">
-    <ul class="u-flex u-flex-wrap u-main-center u-padding-16 u-gap-24">
+  <nav class="u-grid">
+    <ul class="u-flex u-flex-wrap u-main-center u-gap-32">
       <li
         class="card u-max-width-300 u-flex-vertical u-gap-8"
         style="--p-card-padding: 1em"
@@ -204,7 +204,7 @@
 
   <aside
     class="collapsible u-width-full-line u-position-fixed"
-    style="border: 1px solid hsl(var(--color-neutral-10)); bottom: 0;"
+    style="border: 1px solid hsl(var(--color-neutral-10)); bottom: 0; max-height: 60dvh;"
   >
     <div class="collapsible-item">
       <details
@@ -245,7 +245,7 @@
             </div>
             <div
               class="grid-box u-padding-16"
-              style="--grid-gap:2rem; --grid-item-size-small-screens: 10rem; --grid-item-size:10rem; background-color: hsl(var(--color-neutral-0));"
+              style="--grid-gap: 1rem; --grid-item-size-small-screens: 10rem; --grid-item-size:10rem; background-color: hsl(var(--color-neutral-0));"
             >
               <div class="u-grid u-grid-vertical u-gap-8">
                 <p class="u-color-text-offline">Endpoint</p>
@@ -278,21 +278,27 @@
                 class="table-row u-grid"
                 style="grid-template-columns: 3fr 2fr 2fr 2fr 5fr; min-block-size: unset;"
               >
-                <th class="table-thead-col"
-                  ><span class="u-color-text-offline">Date</span></th
-                >
-                <th class="table-thead-col">
-                  <span class="u-color-text-offline">Status</span>
-                </th>
-                <th class="table-thead-col">
-                  <span class="u-color-text-offline">Method</span>
-                </th>
-                <th class="table-thead-col">
-                  <span class="u-color-text-offline">Path</span>
-                </th>
-                <th class="table-thead-col">
-                  <span class="u-color-text-offline">Response</span>
-                </th>
+                {#if logs.length > 0}
+                  <th class="table-thead-col"
+                    ><span class="u-color-text-offline">Date</span></th
+                  >
+                  <th class="table-thead-col">
+                    <span class="u-color-text-offline">Status</span>
+                  </th>
+                  <th class="table-thead-col">
+                    <span class="u-color-text-offline">Method</span>
+                  </th>
+                  <th class="table-thead-col">
+                    <span class="u-color-text-offline">Path</span>
+                  </th>
+                  <th class="table-thead-col">
+                    <span class="u-color-text-offline">Response</span>
+                  </th>
+                {:else}
+                  <th class="table-thead-col">
+                    <span class="u-color-text-offline">Logs</span>
+                  </th>
+                {/if}
               </tr>
             </thead>
 
