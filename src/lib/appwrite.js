@@ -3,7 +3,7 @@ import {
   PUBLIC_APPWRITE_PROJECT_ID,
 } from "$env/static/public";
 
-import { Client, Account, Databases, Health } from "node-appwrite";
+import { Client, Account, Databases } from "appwrite";
 
 const client = new Client()
   .setEndpoint(PUBLIC_APPWRITE_ENDPOINT)

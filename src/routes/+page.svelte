@@ -3,7 +3,7 @@
   import "@appwrite.io/pink";
   import "@appwrite.io/pink-icons";
   import { client } from "$lib/appwrite";
-  import { AppwriteException } from "node-appwrite";
+  import { AppwriteException } from "appwrite";
   import {
     PUBLIC_APPWRITE_ENDPOINT,
     PUBLIC_APPWRITE_PROJECT_ID,
@@ -11,8 +11,9 @@
     PUBLIC_APPWRITE_VERSION,
   } from "$env/static/public";
 
-  /** @type {number} */
-  let detailHeight;
+  /** @type {HTMLDetailsElement}  */
+  let detailsElement;
+  $: detailHeight = detailsElement ? detailsElement.clientHeight : 0;
 
   /** @type {any[]} */
   let logs = [];
@@ -141,7 +142,7 @@
     </p>
 
     <button
-      on:mousedown={sendPing}
+      on:click={sendPing}
       class="button u-margin-block-start-32"
       style={`visibility: ${status === "loading" ? "hidden" : "visible"}`}
     >
@@ -157,8 +158,8 @@
       >
         <h2 class="heading-level-7">Edit your app</h2>
         <p class="body-text-2">
-          Edit <code class="inline-code">app/page.tsx</code> to get stated with building
-          your app
+          Edit <code class="inline-code">app/page.tsx</code> to get started with
+          building your app
         </p>
       </li>
       <li class="card u-max-width-300" style="--p-card-padding: 1em">
@@ -208,10 +209,10 @@
   >
     <div class="collapsible-item">
       <details
+        bind:this={detailsElement}
+        bind:open={showLogs}
         class="collapsible-wrapper u-padding-0"
         style="background-color: hsl(var(--color-neutral-0));"
-        bind:open={showLogs}
-        bind:clientHeight={detailHeight}
       >
         <summary class="collapsible-button u-padding-16">
           <span class="text">Logs</span>
@@ -357,9 +358,11 @@
                   class="table-row u-height-auto"
                   style="min-block-size: unset;"
                 >
-                  <p class="u-color-text-offline u-padding-16">
-                    There are no logs to show
-                  </p>
+                  <td class="table-col u-flex u-cross-center u-padding-16">
+                    <p class="u-color-text-offline">
+                      There are no logs to show
+                    </p>
+                  </td>
                 </tr>
               {/if}
             </tbody>

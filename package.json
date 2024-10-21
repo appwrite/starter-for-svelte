@@ -21,7 +21,6 @@
   "dependencies": {
     "@appwrite.io/pink": "^0.25.0",
     "@appwrite.io/pink-icons": "^0.25.0",
-    "appwrite": "^15.0.0",
-    "node-appwrite": "^13.0.0"
+    "appwrite": "^15.0.0"
   }
 }
