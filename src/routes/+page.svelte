@@ -157,7 +157,7 @@
       >
         <h2 class="heading-level-7">Edit your app</h2>
         <p class="body-text-2">
-          Edit <code class="inline-code">app/page.tsx</code> to get started with
+          Edit <code class="inline-code">src/routes/+page.svelte</code> to get started with
           building your app
         </p>
       </li>
@@ -169,7 +169,7 @@
           class="u-flex-vertical u-gap-8"
         >
           <div class="u-flex u-main-space-between u-cross-center">
-            <h2 class="heading-level-7">Go to console</h2>
+            <h2 class="heading-level-7">Head to Appwrite Cloud</h2>
             <span
               class="icon-arrow-right"
               style="color: hsl(var(--color-neutral-15));"
