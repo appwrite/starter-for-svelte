@@ -11,17 +11,16 @@
     PUBLIC_APPWRITE_VERSION,
   } from "$env/static/public";
 
-  /** @type {HTMLDetailsElement}  */
-  let detailsElement;
-  $: detailHeight = detailsElement ? detailsElement.clientHeight : 0;
+  let detailsElement = $state();
+  let detailHeight = $derived(detailsElement ? detailsElement.clientHeight : 0);
 
   /** @type {any[]} */
-  let logs = [];
+  let logs = $state([]);
 
   /** @type {'idle' | 'loading' | 'success' | 'error'} */
-  let status = "idle";
+  let status = $state("idle");
 
-  let showLogs = false;
+  let showLogs = $state(false);
 
   async function sendPing() {
     if (status === "loading") return;
@@ -142,7 +141,7 @@
     </p>
 
     <button
-      on:click={sendPing}
+      onclick={sendPing}
       class="button u-margin-block-start-32"
       style={`visibility: ${status === "loading" ? "hidden" : "visible"}`}
     >
