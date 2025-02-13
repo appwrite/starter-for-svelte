@@ -8,7 +8,6 @@
     PUBLIC_APPWRITE_ENDPOINT,
     PUBLIC_APPWRITE_PROJECT_ID,
     PUBLIC_APPWRITE_PROJECT_NAME,
-    PUBLIC_APPWRITE_VERSION,
   } from "$env/static/public";
 
   let detailsElement = $state();
@@ -258,10 +257,6 @@
               <div class="u-grid u-grid-vertical u-gap-8">
                 <p class="u-color-text-offline">Project name</p>
                 <p class="body-text-2">{PUBLIC_APPWRITE_PROJECT_NAME}</p>
-              </div>
-              <div class="u-grid u-grid-vertical u-gap-8">
-                <p class="u-color-text-offline">Version</p>
-                <p class="body-text-2">{PUBLIC_APPWRITE_VERSION}</p>
               </div>
             </div>
           </div>
