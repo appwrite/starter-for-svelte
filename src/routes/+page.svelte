@@ -9,9 +9,19 @@
     PUBLIC_APPWRITE_PROJECT_ID,
     PUBLIC_APPWRITE_PROJECT_NAME,
   } from "$env/static/public";
+  import {writable} from "svelte/store";
+  import {onMount} from "svelte";
 
   let detailsElement = $state();
-  let detailHeight = $derived(detailsElement ? detailsElement.clientHeight : 0);
+  let detailHeight = writable(0);
+
+  function handleDetailHeight() {
+    detailHeight.set(detailsElement ? detailsElement.clientHeight : 0);
+  }
+
+  onMount(() => {
+    handleDetailHeight()
+  })
 
   /** @type {any[]} */
   let logs = $state([]);
@@ -51,6 +61,10 @@
       status = "error";
     } finally {
       showLogs = true;
+      requestAnimationFrame(() => {
+        handleDetailHeight()
+      })
+
     }
   }
 </script>
@@ -61,7 +75,7 @@
 
 <main
   class="u-flex u-flex-vertical u-padding-20 u-cross-center u-gap-32 checker-background"
-  style={`margin-bottom: ${detailHeight}px`}
+  style={`margin-bottom: ${$detailHeight}px`}
 >
   <div class="connection-visual">
     <div class="outer-card">
@@ -119,6 +133,7 @@
   <section
     class="u-flex u-flex-vertical u-main-center u-cross-center u-padding-16 u-text-center"
     style="backdrop-filter: blur(1px);"
+    style:height="200px"
   >
     {#if status === "loading"}
       <div class="u-flex u-cross-center u-gap-16">
@@ -209,6 +224,7 @@
       <details
         bind:this={detailsElement}
         bind:open={showLogs}
+        ontoggle={handleDetailHeight}
         class="collapsible-wrapper u-padding-0"
         style="background-color: hsl(var(--color-neutral-0));"
       >
