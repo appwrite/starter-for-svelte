@@ -6,7 +6,7 @@
   import { AppwriteException } from "appwrite";
   import {
     PUBLIC_APPWRITE_ENDPOINT,
-    PUBLIC_APPWRITE_PROJECT_ID,
+     PUBLIC_APPWRITE_PROJECT_ID,
     PUBLIC_APPWRITE_PROJECT_NAME,
   } from "$env/static/public";
   import {writable} from "svelte/store";
