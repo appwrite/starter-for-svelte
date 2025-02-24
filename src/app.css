@@ -117,7 +117,8 @@ button {
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: linear-gradient(#e6e6e690 1px, transparent 1px),
+  background-image:
+    linear-gradient(#e6e6e690 1px, transparent 1px),
     linear-gradient(90deg, #e6e6e690 1px, transparent 1px);
   background-size: min(4em, 10dvw) min(4em, 10dvw);
   mask-image: radial-gradient(ellipse at 40% 30%, black 0%, transparent 100%);
