@@ -157,11 +157,11 @@
         <span>Waiting for connection...</span>
       </div>
     {:else if status === "success"}
-      <h1 class="text-2xl font-light text-[#2D2D31]">Congratulations!</h1>
+      <h1 class="font-[Poppins] text-2xl font-light text-[#2D2D31]">
+        Congratulations!
+      </h1>
     {:else}
-      <h1
-        class="font-[Poppins, arial, sans-serf] text-2xl font-light text-[#2D2D31]"
-      >
+      <h1 class="font-[Poppins] text-2xl font-light text-[#2D2D31]">
         Check connection
       </h1>
     {/if}
