@@ -18,7 +18,7 @@
     "svelte": "^5.57.2",
     "svelte-check": "^4.0.0",
     "typescript": "^5.5.3",
-    "vite": "^6.4.5"
+    "vite": "^8.3.4"
   },
   "type": "module",
   "dependencies": {
