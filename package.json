@@ -22,7 +22,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@appwrite.io/pink-icons": "^0.25.0",
+    "@appwrite.io/pink-icons": "^1.0.0",
     "@sveltejs/adapter-node": "^5.2.12",
     "@tailwindcss/vite": "^4.3.3",
     "appwrite": "^21.0.0",
