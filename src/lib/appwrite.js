@@ -1,7 +1,7 @@
 import {
   PUBLIC_APPWRITE_ENDPOINT,
   PUBLIC_APPWRITE_PROJECT_ID,
-} from "$env/static/public";
+} from "$app/env/public";
 
 import { Client, Account, Databases } from "appwrite";
 

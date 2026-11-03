@@ -1,12 +1,12 @@
 <script lang="ts">
   import "../app.css";
-  import { client } from "$lib/appwrite";
+  import { client } from "#lib/appwrite.js";
   import { AppwriteException } from "appwrite";
   import {
     PUBLIC_APPWRITE_ENDPOINT,
     PUBLIC_APPWRITE_PROJECT_ID,
     PUBLIC_APPWRITE_PROJECT_NAME,
-  } from "$env/static/public";
+  } from "$app/env/public";
   import { writable } from "svelte/store";
   import { onMount } from "svelte";
   import appwriteSvg from "../../static/appwrite-icon.svg";
